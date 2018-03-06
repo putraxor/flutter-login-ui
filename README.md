@@ -1,8 +1,5 @@
-# login
+# Login UI
 
-A new Flutter project.
+A clean and simple login UI screen with a basic hero animation in Flutter, a mobile sdk framework by Google.
 
-## Getting Started
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
