@@ -8,6 +8,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  GlobalKey<FormState> loginForm = GlobalKey();
+
+  void validateAndLogin() {
+    if (loginForm.currentState.validate()) {
+      Navigator.of(context).pushNamed(HomePage.tag);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final logo = Hero(
@@ -21,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
 
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
+      validator: (value) => value.isEmpty ? 'Inform your e-mail' : null,
       autofocus: false,
       initialValue: 'alucard@gmail.com',
       decoration: InputDecoration(
@@ -31,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final password = TextFormField(
+      validator: (value) => value.isEmpty ? 'Inform your password' : null,
       autofocus: false,
       initialValue: 'some password',
       obscureText: true,
@@ -48,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          Navigator.of(context).pushNamed(HomePage.tag);
+          validateAndLogin();
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
@@ -67,19 +77,22 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            logo,
-            SizedBox(height: 48.0),
-            email,
-            SizedBox(height: 8.0),
-            password,
-            SizedBox(height: 24.0),
-            loginButton,
-            forgotLabel
-          ],
+        child: Form(
+          key: loginForm,
+          child: ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.only(left: 24.0, right: 24.0),
+            children: <Widget>[
+              logo,
+              SizedBox(height: 48.0),
+              email,
+              SizedBox(height: 8.0),
+              password,
+              SizedBox(height: 24.0),
+              loginButton,
+              forgotLabel
+            ],
+          ),
         ),
       ),
     );
