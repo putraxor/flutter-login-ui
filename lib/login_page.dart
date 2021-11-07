@@ -10,6 +10,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> loginForm = GlobalKey();
 
+  /// Validates if the form has all its mandatory inputs filled out.
+
   void validateAndLogin() {
     if (loginForm.currentState.validate()) {
       Navigator.of(context).pushNamed(HomePage.tag);
